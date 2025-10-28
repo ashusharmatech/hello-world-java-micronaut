@@ -30,12 +30,17 @@ jobs:
       - name: Make mvnw executable
         run: chmod +x mvnw
 
+      - name: Build Micronaut Fat Jar
+        run: |
+          ./mvnw -B clean package -Dpackaging=jar -DskipTests
+
       - name: Build and Push Docker Image
         env:
           IMAGE_NAME: ashusharma/hello-world-java-micronaut
         run: |
-          ./mvnw -B compile jib:build \
+          ./mvnw -B jib:build \
             -DskipTests \
             -Djib.to.image=ashusharma/hello-world-java-micronaut:latest \
-            -Djib.to.auth.username=$DOCKER_USERNAME \
-            -Djib.to.auth.password=$DOCKER_PASSWORD
+            -Djib.to.auth.username=${{ secrets.DOCKERHUB_USERNAME }} \
+            -Djib.to.auth.password=${{ secrets.DOCKERHUB_TOKEN }}
+
