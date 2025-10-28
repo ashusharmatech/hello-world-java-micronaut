@@ -34,6 +34,8 @@ jobs:
         env:
           IMAGE_NAME: ashusharma/hello-world-java-micronaut
         run: |
-          ./mvnw -B package -DskipTests --no-transfer-progress
-          docker build -t $IMAGE_NAME:latest .
-          docker push $IMAGE_NAME:latest
+          ./mvnw -B compile jib:build \
+            -DskipTests \
+            -Djib.to.image=ashusharma/hello-world-java-micronaut:latest \
+            -Djib.to.auth.username=$DOCKER_USERNAME \
+            -Djib.to.auth.password=$DOCKER_PASSWORD
