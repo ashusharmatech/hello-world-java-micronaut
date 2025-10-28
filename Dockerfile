@@ -3,6 +3,9 @@ FROM eclipse-temurin:21-jdk-jammy AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
+COPY mvnw .
+COPY .mvn ./.mvn
+RUN chmod +x mvnw
 RUN mvn package -DskipTests
 
 # Runtime Stage
