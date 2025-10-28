@@ -27,6 +27,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Make mvnw executable
+        run: chmod +x mvnw
+
       - name: Build and Push Docker Image
         env:
           IMAGE_NAME: ashusharma/hello-world-java-micronaut
