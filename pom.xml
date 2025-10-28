@@ -90,6 +90,13 @@
                 <configuration>
                     <configFile>aot-${packaging}.properties</configFile>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
