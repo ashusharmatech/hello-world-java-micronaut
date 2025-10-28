@@ -35,11 +35,9 @@ jobs:
           ./mvnw -B clean package -Dpackaging=jar -DskipTests
 
       - name: Build and Push Docker Image
-        env:
-          IMAGE_NAME: ashusharma/hello-world-java-micronaut
         run: |
-          ./mvnw -B jib:build \
-            -DskipTests \
+          ./mvnw -B clean package \
+            -Dpackaging=docker \
             -Djib.to.image=ashusharma/hello-world-java-micronaut:latest \
             -Djib.to.auth.username=${{ secrets.DOCKERHUB_USERNAME }} \
             -Djib.to.auth.password=${{ secrets.DOCKERHUB_TOKEN }}
